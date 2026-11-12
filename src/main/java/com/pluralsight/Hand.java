@@ -9,8 +9,7 @@ public class Hand {
         cards = new ArrayList<>();
     }
 
-    // A Card is dealt to the Hand and the Hand stores it.
-    // We flip it face up so the player can see it.
+    // Add a card and turn it face up
     public void deal(Card card) {
         if (!card.isFaceUp()) {
             card.flip();
@@ -22,9 +21,7 @@ public class Hand {
         return cards.size();
     }
 
-    // Adds up the points of every card in the hand.
-    // An Ace counts as 11, but if that would make the hand go over 21,
-    // the Ace counts as 1 instead (we take away 10).
+    // Add up the points (Ace = 11, or 1 if 11 would go over 21)
     public int getValue() {
         int value = 0;
         int aces = 0;
@@ -36,7 +33,7 @@ public class Hand {
             }
         }
 
-        // Turn Aces from 11 into 1 until we are not busted (or run out of Aces)
+        // Over 21? Count an Ace as 1 instead
         while (value > 21 && aces > 0) {
             value -= 10;
             aces--;
@@ -45,7 +42,7 @@ public class Hand {
         return value;
     }
 
-    // Shows the cards like: K of Hearts, 7 of Clubs
+    // Show cards like: K of Hearts, 7 of Clubs
     @Override
     public String toString() {
         String text = "";

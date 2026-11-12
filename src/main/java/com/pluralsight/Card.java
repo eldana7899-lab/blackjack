@@ -12,7 +12,7 @@ public class Card {
     }
 
     public String getSuit() {
-        // only return the suit if the card is face up
+        // hidden if face down
         if (isFaceUp) {
             return suit;
         } else {
@@ -21,10 +21,9 @@ public class Card {
     }
 
     public String getValue() {
-        // only return the value if the card is face up
+        // hidden if face down
         if (isFaceUp) {
-            // this is the string value of the card
-            // i.e. A, K, Q, J, 10, 9 ...
+            // like A, K, Q, 10, 9
             return value;
         } else {
             return "#";
@@ -32,7 +31,7 @@ public class Card {
     }
 
     public int getPointValue() {
-        // only return the value if the card is face up
+        // hidden if face down
         if (isFaceUp) {
             switch (this.value) {
                 case "A":
@@ -54,7 +53,7 @@ public class Card {
             }
         }
 
-        //if card is not face up
+        // face down = 0 points
         return 0;
     }
 

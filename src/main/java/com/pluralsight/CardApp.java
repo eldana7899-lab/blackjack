@@ -5,27 +5,27 @@ public class CardApp {
 
     public static void main(String[] args) {
 
-        //create the deck
+        // make the deck
         Deck deck = new Deck();
 
         deck.shuffle();
 
         System.out.println("Deck Size:" + deck.getSize());
 
-        //create the hand
+        // make a hand
         Hand hand1 = new Hand();
 
 
 
-        // deal 5 cards from the deck and add them to the hand
+        // deal 5 cards
         for (int i = 0; i < 5; i++) {
-            // get a card from the deck
+            // take a card from the deck
             Card card = deck.deal();
-            // deal that card to the hand
+            // put it in the hand
             hand1.deal(card);
         }
 
-        //print out the value of all the cards in the hand
+        // print the total
         System.out.println("This hand is worth " + hand1.getValue());
     }
 

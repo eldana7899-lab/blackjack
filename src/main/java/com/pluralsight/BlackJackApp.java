@@ -3,8 +3,7 @@ package com.pluralsight;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Blackjack: every player gets 2 cards, can Hit or Stay,
-// and whoever is closest to 21 without going over wins.
+// Blackjack: closest to 21 without going over wins
 public class BlackJackApp {
 
     private static Scanner scanner = new Scanner(System.in);
@@ -15,7 +14,7 @@ public class BlackJackApp {
         System.out.println("========== WELCOME TO BLACKJACK ==========");
         System.out.println();
 
-        // ---------- 1. Set up the players ----------
+        // 1. Get the players
         int numberOfPlayers = askForNumberOfPlayers();
         ArrayList<Player> players = new ArrayList<>();
 
@@ -23,35 +22,35 @@ public class BlackJackApp {
             System.out.print("Enter the name of player " + i + ": ");
             String name = scanner.nextLine().trim();
             if (name.isEmpty()) {
-                name = "Player " + i; // give them a name if they skip it
+                name = "Player " + i; // no name typed
             }
             players.add(new Player(name));
         }
 
-        // ---------- 2. Make the deck and shuffle it ----------
+        // 2. Make and shuffle the deck
         Deck deck = new Deck();
         deck.shuffle();
 
-        // ---------- 3. Deal 2 cards to every player ----------
+        // 3. Deal 2 cards each
         for (int round = 0; round < 2; round++) {
             for (Player player : players) {
                 player.getHand().deal(deck.deal());
             }
         }
 
-        // ---------- 4. Show everyone's starting hand ----------
+        // 4. Show starting hands
         System.out.println();
         System.out.println("---------- Starting Hands ----------");
         for (Player player : players) {
             showHand(player);
         }
 
-        // ---------- 5. Each player takes a turn (Hit or Stay) ----------
+        // 5. Each player's turn
         for (Player player : players) {
             takeTurn(player, deck);
         }
 
-        // ---------- 6. Show final hands and pick the winner ----------
+        // 6. Show final hands and the winner
         System.out.println();
         System.out.println("---------- Final Hands ----------");
         for (Player player : players) {
@@ -62,7 +61,7 @@ public class BlackJackApp {
         scanner.close();
     }
 
-    // Asks how many people are playing (keeps asking until it gets a good number)
+    // Ask how many players (1-7)
     private static int askForNumberOfPlayers() {
         while (true) {
             System.out.print("How many players? (1-7): ");
@@ -73,13 +72,13 @@ public class BlackJackApp {
                     return number;
                 }
             } catch (NumberFormatException e) {
-                // not a number, we will ask again below
+                // not a number
             }
             System.out.println("Please enter a number from 1 to 7.");
         }
     }
 
-    // Lets one player Hit (take a card) or Stay until they stop or bust
+    // Hit = take a card, Stay = stop
     private static void takeTurn(Player player, Deck deck) {
         System.out.println();
         System.out.println("---------- " + player.getName() + "'s Turn ----------");
@@ -114,13 +113,13 @@ public class BlackJackApp {
         }
     }
 
-    // Prints a player's cards and their total
+    // Print a player's cards and total
     private static void showHand(Player player) {
         Hand hand = player.getHand();
         System.out.println(player.getName() + ": " + hand + "  (Total: " + hand.getValue() + ")");
     }
 
-    // Finds the highest score that is 21 or under. Handles ties and everyone busting.
+    // Highest score 21 or under wins
     private static void announceWinner(ArrayList<Player> players) {
         int bestScore = 0;
         ArrayList<Player> winners = new ArrayList<>();
@@ -129,7 +128,7 @@ public class BlackJackApp {
             int score = player.getHand().getValue();
 
             if (player.isBusted()) {
-                continue; // busted players can't win
+                continue; // over 21 can't win
             }
 
             if (score > bestScore) {

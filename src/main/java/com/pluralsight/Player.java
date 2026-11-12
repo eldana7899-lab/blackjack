@@ -1,6 +1,6 @@
 package com.pluralsight;
 
-// A Player has a name and a Hand of cards
+// A player has a name and cards
 public class Player {
     private String name;
     private Hand hand;
@@ -18,7 +18,7 @@ public class Player {
         return hand;
     }
 
-    // A player busts when their hand goes over 21
+    // True if the hand is over 21
     public boolean isBusted() {
         return hand.getValue() > 21;
     }
